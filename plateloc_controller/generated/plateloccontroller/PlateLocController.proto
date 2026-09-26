@@ -1,0 +1,186 @@
+syntax = "proto3";
+
+import "SiLAFramework.proto";
+
+package sila2.com.ncs.instruments.plateloccontroller.v1;
+
+/* A SiLA Server for controlling the PlateLoc from Agilent Technologies. VWorks ActiveX Control (version 13.1.0.1366 or later) is required on the computer running this SiLA Server. */
+service PlateLocController {
+  /* 
+      Start a seal cycle.
+      This command triggers the execution of steps moving stage in, applying seal, and moving stage out in sequence.
+     */
+  rpc StartCycle (sila2.com.ncs.instruments.plateloccontroller.v1.StartCycle_Parameters) returns (sila2.org.silastandard.CommandConfirmation) {}
+  /* Monitor the state of StartCycle */
+  rpc StartCycle_Info (sila2.org.silastandard.CommandExecutionUUID) returns (stream sila2.org.silastandard.ExecutionInfo) {}
+  /* Retrieve result of StartCycle */
+  rpc StartCycle_Result(sila2.org.silastandard.CommandExecutionUUID) returns (sila2.com.ncs.instruments.plateloccontroller.v1.StartCycle_Responses) {}
+  /* 
+      Terminate the seal cycle currently in progress.
+     */
+  rpc StopCycle (sila2.com.ncs.instruments.plateloccontroller.v1.StopCycle_Parameters) returns (sila2.org.silastandard.CommandConfirmation) {}
+  /* Monitor the state of StopCycle */
+  rpc StopCycle_Info (sila2.org.silastandard.CommandExecutionUUID) returns (stream sila2.org.silastandard.ExecutionInfo) {}
+  /* Retrieve result of StopCycle */
+  rpc StopCycle_Result(sila2.org.silastandard.CommandExecutionUUID) returns (sila2.com.ncs.instruments.plateloccontroller.v1.StopCycle_Responses) {}
+  /* Assign the specified parameter value as the seal-cycle duration (in seconds). */
+  rpc SetSealingTime (sila2.com.ncs.instruments.plateloccontroller.v1.SetSealingTime_Parameters) returns (sila2.com.ncs.instruments.plateloccontroller.v1.SetSealingTime_Responses) {}
+  /* Assign the specified parameter value as the sealing temperature (°C) of the hot plate. */
+  rpc SetSealingTemperature (sila2.com.ncs.instruments.plateloccontroller.v1.SetSealingTemperature_Parameters) returns (sila2.com.ncs.instruments.plateloccontroller.v1.SetSealingTemperature_Responses) {}
+  /* 
+      Reset the server to its IDLE state. This command is common to all instruments.
+     */
+  rpc Reset (sila2.com.ncs.instruments.plateloccontroller.v1.Reset_Parameters) returns (sila2.org.silastandard.CommandConfirmation) {}
+  /* Monitor the state of Reset */
+  rpc Reset_Info (sila2.org.silastandard.CommandExecutionUUID) returns (stream sila2.org.silastandard.ExecutionInfo) {}
+  /* Retrieve result of Reset */
+  rpc Reset_Result(sila2.org.silastandard.CommandExecutionUUID) returns (sila2.com.ncs.instruments.plateloccontroller.v1.Reset_Responses) {}
+  /* Enumerate profiles for PlateLoc. */
+  rpc EnumerateProfiles (sila2.com.ncs.instruments.plateloccontroller.v1.EnumerateProfiles_Parameters) returns (sila2.com.ncs.instruments.plateloccontroller.v1.EnumerateProfiles_Responses) {}
+  /* 
+      Get the sealing temperature (°C) currently set by the user.
+     */
+  rpc Get_SealingTemperature (sila2.com.ncs.instruments.plateloccontroller.v1.Get_SealingTemperature_Parameters) returns (sila2.com.ncs.instruments.plateloccontroller.v1.Get_SealingTemperature_Responses) {}
+  /* 
+      Get the sealing time currently set by the user.
+     */
+  rpc Get_SealingTime (sila2.com.ncs.instruments.plateloccontroller.v1.Get_SealingTime_Parameters) returns (sila2.com.ncs.instruments.plateloccontroller.v1.Get_SealingTime_Responses) {}
+  /* 
+      Actual temperature (°C) of the hot plate.
+     */
+  rpc Get_ActualTemperature (sila2.com.ncs.instruments.plateloccontroller.v1.Get_ActualTemperature_Parameters) returns (sila2.com.ncs.instruments.plateloccontroller.v1.Get_ActualTemperature_Responses) {}
+  /* 
+      The count of seal cycles performed.
+     */
+  rpc Get_CycleCount (sila2.com.ncs.instruments.plateloccontroller.v1.Get_CycleCount_Parameters) returns (sila2.com.ncs.instruments.plateloccontroller.v1.Get_CycleCount_Responses) {}
+  /* 
+      The firmeware version of the instrument.
+     */
+  rpc Get_FirmwareVersion (sila2.com.ncs.instruments.plateloccontroller.v1.Get_FirmwareVersion_Parameters) returns (sila2.com.ncs.instruments.plateloccontroller.v1.Get_FirmwareVersion_Responses) {}
+  /* 
+      The version number of the PlateLoc ActiveX Control.
+     */
+  rpc Get_Version (sila2.com.ncs.instruments.plateloccontroller.v1.Get_Version_Parameters) returns (sila2.com.ncs.instruments.plateloccontroller.v1.Get_Version_Responses) {}
+  /* 
+      Returns the status of the instrument. This property is common to all instruments.
+      0: Not Connected
+      1: Idle
+      2: Running
+      3: Error
+     */
+  rpc Subscribe_Status (sila2.com.ncs.instruments.plateloccontroller.v1.Subscribe_Status_Parameters) returns (stream sila2.com.ncs.instruments.plateloccontroller.v1.Subscribe_Status_Responses) {}
+}
+
+/* Parameters for StartCycle */
+message StartCycle_Parameters {
+}
+
+/* Responses of StartCycle */
+message StartCycle_Responses {
+}
+
+/* Parameters for StopCycle */
+message StopCycle_Parameters {
+}
+
+/* Responses of StopCycle */
+message StopCycle_Responses {
+}
+
+/* Parameters for SetSealingTime */
+message SetSealingTime_Parameters {
+  sila2.org.silastandard.Real SealingTime = 1;  /* The value to be set as sealing time. */
+}
+
+/* Responses of SetSealingTime */
+message SetSealingTime_Responses {
+}
+
+/* Parameters for SetSealingTemperature */
+message SetSealingTemperature_Parameters {
+  sila2.org.silastandard.Integer SealingTemperature = 1;  /* The value to be set as sealing temperature. */
+}
+
+/* Responses of SetSealingTemperature */
+message SetSealingTemperature_Responses {
+}
+
+/* Parameters for Reset */
+message Reset_Parameters {
+}
+
+/* Responses of Reset */
+message Reset_Responses {
+}
+
+/* Parameters for EnumerateProfiles */
+message EnumerateProfiles_Parameters {
+}
+
+/* Responses of EnumerateProfiles */
+message EnumerateProfiles_Responses {
+  repeated sila2.org.silastandard.String ProfileNames = 1;  /* The names of the profiles. */
+}
+
+/* Parameters for SealingTemperature */
+message Get_SealingTemperature_Parameters {
+}
+
+/* Responses of SealingTemperature */
+message Get_SealingTemperature_Responses {
+  sila2.org.silastandard.Integer SealingTemperature = 1;  /* Get the sealing temperature (°C) currently set by the user. */
+}
+
+/* Parameters for SealingTime */
+message Get_SealingTime_Parameters {
+}
+
+/* Responses of SealingTime */
+message Get_SealingTime_Responses {
+  sila2.org.silastandard.Real SealingTime = 1;  /* Get the sealing time currently set by the user. */
+}
+
+/* Parameters for ActualTemperature */
+message Get_ActualTemperature_Parameters {
+}
+
+/* Responses of ActualTemperature */
+message Get_ActualTemperature_Responses {
+  sila2.org.silastandard.Integer ActualTemperature = 1;  /* Actual temperature (°C) of the hot plate. */
+}
+
+/* Parameters for CycleCount */
+message Get_CycleCount_Parameters {
+}
+
+/* Responses of CycleCount */
+message Get_CycleCount_Responses {
+  sila2.org.silastandard.Integer CycleCount = 1;  /* The count of seal cycles performed. */
+}
+
+/* Parameters for FirmwareVersion */
+message Get_FirmwareVersion_Parameters {
+}
+
+/* Responses of FirmwareVersion */
+message Get_FirmwareVersion_Responses {
+  sila2.org.silastandard.String FirmwareVersion = 1;  /* The firmeware version of the instrument. */
+}
+
+/* Parameters for Version */
+message Get_Version_Parameters {
+}
+
+/* Responses of Version */
+message Get_Version_Responses {
+  sila2.org.silastandard.String Version = 1;  /* The version number of the PlateLoc ActiveX Control. */
+}
+
+/* Parameters for Status */
+message Subscribe_Status_Parameters {
+}
+
+/* Responses of Status */
+message Subscribe_Status_Responses {
+  sila2.org.silastandard.Integer Status = 1;  /* Returns the status of the instrument. This property is common to all instruments. 0: Not Connected 1: Idle 2: Running 3: Error */
+}

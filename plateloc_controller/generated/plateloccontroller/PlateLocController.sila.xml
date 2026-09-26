@@ -1,0 +1,253 @@
+<Feature xmlns="http://www.sila-standard.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Category="instruments" FeatureVersion="1.0" MaturityLevel="Draft" Originator="com.ncs" SiLA2Version="1.0" xsi:schemaLocation="http://www.sila-standard.org https://gitlab.com/SiLA2/sila_base/raw/master/schema/FeatureDefinition.xsd">
+  <Identifier>PlateLocController</Identifier>
+  <DisplayName>PlateLoc Controller</DisplayName>
+  <Description>A SiLA Server for controlling the PlateLoc from Agilent Technologies.
+    VWorks ActiveX Control (version 13.1.0.1366 or later) is required on the computer running this SiLA Server.</Description>
+  <!-- Commands -->
+  <Command>
+    <Identifier>StartCycle</Identifier>
+    <DisplayName>Start Cycle</DisplayName>
+    <Description>Start a seal cycle.
+      This command triggers the execution of steps moving stage in, applying seal, and moving stage out in sequence.</Description>
+    <Observable>Yes</Observable>
+    <DefinedExecutionErrors>
+      <Identifier>CommandIsRunning</Identifier>
+      <Identifier>NotInitialized</Identifier>
+      <Identifier>CommandExecutionAborted</Identifier>
+      <Identifier>InstrumentErrorOccurred</Identifier>
+      <Identifier>InvalidInstrumentStatusError</Identifier>
+    </DefinedExecutionErrors>
+  </Command>
+  <Command>
+    <Identifier>StopCycle</Identifier>
+    <DisplayName>Stop Cycle</DisplayName>
+    <Description>Terminate the seal cycle currently in progress.</Description>
+    <Observable>Yes</Observable>
+    <DefinedExecutionErrors>
+      <Identifier>NotInitialized</Identifier>
+      <Identifier>InstrumentErrorOccurred</Identifier>
+      <Identifier>InvalidInstrumentStatusError</Identifier>
+    </DefinedExecutionErrors>
+  </Command>
+  <Command>
+    <Identifier>SetSealingTime</Identifier>
+    <DisplayName>Set Sealing Time</DisplayName>
+    <Description>Assign the specified parameter value as the seal-cycle duration (in seconds).</Description>
+    <Observable>No</Observable>
+    <Parameter>
+      <Identifier>SealingTime</Identifier>
+      <DisplayName>Sealing Time</DisplayName>
+      <Description>The value to be set as sealing time.</Description>
+      <DataType>
+        <Constrained>
+          <DataType>
+            <Basic>Real</Basic>
+          </DataType>
+          <Constraints>
+            <MinimalInclusive>0.5</MinimalInclusive>
+            <MaximalInclusive>12.0</MaximalInclusive>
+          </Constraints>
+        </Constrained>
+      </DataType>
+    </Parameter>
+    <DefinedExecutionErrors>
+      <Identifier>NotInitialized</Identifier>
+      <Identifier>InstrumentErrorOccurred</Identifier>
+      <Identifier>InvalidInstrumentStatusError</Identifier>
+    </DefinedExecutionErrors>
+  </Command>
+  <Command>
+    <Identifier>SetSealingTemperature</Identifier>
+    <DisplayName>Set Sealing Temperature</DisplayName>
+    <Description>Assign the specified parameter value as the sealing temperature (&#176;C) of the hot plate.</Description>
+    <Observable>No</Observable>
+    <Parameter>
+      <Identifier>SealingTemperature</Identifier>
+      <DisplayName>Sealing Temperature</DisplayName>
+      <Description>The value to be set as sealing temperature.</Description>
+      <DataType>
+        <Constrained>
+          <DataType>
+            <Basic>Integer</Basic>
+          </DataType>
+          <Constraints>
+            <MinimalInclusive>20</MinimalInclusive>
+            <MaximalInclusive>235</MaximalInclusive>
+          </Constraints>
+        </Constrained>
+      </DataType>
+    </Parameter>
+    <DefinedExecutionErrors>
+      <Identifier>NotInitialized</Identifier>
+      <Identifier>InstrumentErrorOccurred</Identifier>
+      <Identifier>InvalidInstrumentStatusError</Identifier>
+    </DefinedExecutionErrors>
+  </Command>
+  <Command>
+    <Identifier>Reset</Identifier>
+    <DisplayName>Reset</DisplayName>
+    <Description>Reset the server to its IDLE state. This command is common to all instruments.</Description>
+    <Observable>Yes</Observable>
+    <DefinedExecutionErrors>
+      <Identifier>NotInitialized</Identifier>
+      <Identifier>InstrumentErrorOccurred</Identifier>
+      <Identifier>InvalidInstrumentStatusError</Identifier>
+    </DefinedExecutionErrors>
+  </Command>
+  <Command>
+    <Identifier>EnumerateProfiles</Identifier>
+    <DisplayName>Enumerate Profiles</DisplayName>
+    <Description>Enumerate profiles for PlateLoc.</Description>
+    <Observable>No</Observable>
+    <Response>
+      <Identifier>ProfileNames</Identifier>
+      <DisplayName>Profile names</DisplayName>
+      <Description>The names of the profiles.</Description>
+      <DataType>
+        <List>
+          <DataType>
+            <Basic>String</Basic>
+          </DataType>
+        </List>
+      </DataType>
+    </Response>
+    <DefinedExecutionErrors>
+      <Identifier>NotInitialized</Identifier>
+      <Identifier>InvalidInstrumentStatusError</Identifier>
+    </DefinedExecutionErrors>
+  </Command>
+  <!-- Properties -->
+  <Property>
+    <Identifier>SealingTemperature</Identifier>
+    <DisplayName>Sealing Temperature</DisplayName>
+    <Description>Get the sealing temperature (&#176;C) currently set by the user.</Description>
+    <Observable>No</Observable>
+    <DataType>
+      <Basic>Integer</Basic>
+    </DataType>
+    <DefinedExecutionErrors>
+      <Identifier>NotInitialized</Identifier>
+      <Identifier>InstrumentErrorOccurred</Identifier>
+      <Identifier>InvalidInstrumentStatusError</Identifier>
+    </DefinedExecutionErrors>
+  </Property>
+  <Property>
+    <Identifier>SealingTime</Identifier>
+    <DisplayName>Sealing Time</DisplayName>
+    <Description>Get the sealing time currently set by the user.</Description>
+    <Observable>No</Observable>
+    <DataType>
+      <Basic>Real</Basic>
+    </DataType>
+    <DefinedExecutionErrors>
+      <Identifier>NotInitialized</Identifier>
+      <Identifier>InstrumentErrorOccurred</Identifier>
+      <Identifier>InvalidInstrumentStatusError</Identifier>
+    </DefinedExecutionErrors>
+  </Property>
+  <Property>
+    <Identifier>ActualTemperature</Identifier>
+    <DisplayName>Actual Temperature</DisplayName>
+    <Description>Actual temperature (&#176;C) of the hot plate.</Description>
+    <Observable>No</Observable>
+    <DataType>
+      <Basic>Integer</Basic>
+    </DataType>
+    <DefinedExecutionErrors>
+      <Identifier>NotInitialized</Identifier>
+      <Identifier>InstrumentErrorOccurred</Identifier>
+      <Identifier>InvalidInstrumentStatusError</Identifier>
+    </DefinedExecutionErrors>
+  </Property>
+  <Property>
+    <Identifier>CycleCount</Identifier>
+    <DisplayName>Cycle Count</DisplayName>
+    <Description>The count of seal cycles performed.</Description>
+    <Observable>No</Observable>
+    <DataType>
+      <Basic>Integer</Basic>
+    </DataType>
+    <DefinedExecutionErrors>
+      <Identifier>NotInitialized</Identifier>
+      <Identifier>InstrumentErrorOccurred</Identifier>
+      <Identifier>InvalidInstrumentStatusError</Identifier>
+    </DefinedExecutionErrors>
+  </Property>
+  <Property>
+    <Identifier>FirmwareVersion</Identifier>
+    <DisplayName>Firmware Version</DisplayName>
+    <Description>The firmeware version of the instrument.</Description>
+    <Observable>No</Observable>
+    <DataType>
+      <Basic>String</Basic>
+    </DataType>
+    <DefinedExecutionErrors>
+      <Identifier>NotInitialized</Identifier>
+      <Identifier>InstrumentErrorOccurred</Identifier>
+      <Identifier>InvalidInstrumentStatusError</Identifier>
+    </DefinedExecutionErrors>
+  </Property>
+  <Property>
+    <Identifier>Version</Identifier>
+    <DisplayName>Version</DisplayName>
+    <Description>The version number of the PlateLoc ActiveX Control.</Description>
+    <Observable>No</Observable>
+    <DataType>
+      <Basic>String</Basic>
+    </DataType>
+    <DefinedExecutionErrors>
+      <Identifier>NotInitialized</Identifier>
+      <Identifier>InstrumentErrorOccurred</Identifier>
+      <Identifier>InvalidInstrumentStatusError</Identifier>
+    </DefinedExecutionErrors>
+  </Property>
+  <Property>
+    <Identifier>Status</Identifier>
+    <DisplayName>Status</DisplayName>
+    <Description>Returns the status of the instrument. This property is common to all instruments.
+      0: Not Connected
+      1: Idle
+      2: Running
+      3: Error</Description>
+    <Observable>Yes</Observable>
+    <DataType>
+      <Constrained>
+        <DataType>
+          <Basic>Integer</Basic>
+        </DataType>
+        <Constraints>
+          <MinimalInclusive>0</MinimalInclusive>
+          <MaximalInclusive>3</MaximalInclusive>
+        </Constraints>
+      </Constrained>
+    </DataType>
+  </Property>
+  <!-- Error definitions -->
+  <DefinedExecutionError>
+    <Identifier>CommandIsRunning</Identifier>
+    <DisplayName>Command is runnning</DisplayName>
+    <Description>The command is currently running. Please retry after the execution is completed.</Description>
+  </DefinedExecutionError>
+  <DefinedExecutionError>
+    <Identifier>NotInitialized</Identifier>
+    <DisplayName>Not Initialized</DisplayName>
+    <Description>PlateLoc is not initialized. The possible causes are as follows:
+      * PlateLoc is not connected to the PC running PlateLocController.
+      * The profile for PlateLoc has not been created or the correct profile is not specified.</Description>
+  </DefinedExecutionError>
+  <DefinedExecutionError>
+    <Identifier>CommandExecutionAborted</Identifier>
+    <DisplayName>Command Execution Aborted</DisplayName>
+    <Description>The command execution was aborted because an error occured.</Description>
+  </DefinedExecutionError>
+  <DefinedExecutionError>
+    <Identifier>InstrumentErrorOccurred</Identifier>
+    <DisplayName>Instrument Error Occured</DisplayName>
+    <Description>An error occurred on the instrument during command execution. Inspect the instrument.</Description>
+  </DefinedExecutionError>
+  <DefinedExecutionError>
+    <Identifier>InvalidInstrumentStatusError</Identifier>
+    <DisplayName>Invalid Instrument Status Error</DisplayName>
+    <Description>The instruments is not in a valid status to accept the specified command.</Description>
+  </DefinedExecutionError>
+</Feature>

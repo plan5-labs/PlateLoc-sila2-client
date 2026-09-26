@@ -1,0 +1,22 @@
+[project]
+name = "plateloc_controller"
+version = "0.0.0"
+requires-python = ">=3.10"
+dependencies = [
+    "sila2",
+    "typer",
+    "PyYAML"
+]
+
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["plateloc_controller*"]
+
+[tool.setuptools.package-data]
+"plateloc_controller.generated" = [
+    "*/*.sila.xml",
+    "*/*.proto",
+]
